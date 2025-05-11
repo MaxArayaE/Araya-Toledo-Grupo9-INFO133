@@ -1,0 +1,101 @@
+Id_cliente,Nombre,Telefono,Correo
+1,Amancio Carbonell-Cabanillas,+34 703532703,gimenoascension@hotmail.com
+2,Miguel Guardiola-Jordá,+34 728 126 838,liliavillalobos@gmail.com
+3,Nilo del Acevedo,+34 728762279,olimpiacarvajal@bilbao.com
+4,Claudia Alemany Bernat,+34749 49 75 97,manzanaresjulio@hotmail.com
+5,Rosalina del Robles,+34709 83 37 36,carmenfrutos@gmail.com
+6,Jacobo de Botella,+34651 968 913,teresa55@marin-pedraza.com
+7,Rafael Moraleda-Requena,+34 622 981 933,toribiollorens@yahoo.com
+8,Verónica María Teresa Espejo Alfaro,+34747112096,acunalidia@yahoo.com
+9,Marianela Portillo Miranda,+34742 086 667,ascension79@hotmail.com
+10,Yésica Menéndez Barberá,+34835 668 871,agustina43@abril.com
+11,Aurora Cabello-Duque,+34722 68 88 05,felix24@gmail.com
+12,Matilde Asenjo Soler,+34731 842 937,ucasanova@aviles-aliaga.com
+13,Alejo del Sacristán,+34 745 157 901,bernardinocabello@beltran-huerta.net
+14,Amado Paniagua Caparrós,+34713 70 36 41,durantrini@garriga-diaz.es
+15,Virgilio Chacón,+34742 53 97 98,icalzada@amigo-seco.com
+16,Encarnita Bermejo Bayona,+34731 912 354,gbayon@ricart.com
+17,Néstor León Serra Diéguez,+34719 45 30 22,ibanezdalila@yahoo.com
+18,Trini Garrido Agullo,+34 602 617 160,nmartin@hotmail.com
+19,Luisina Bernad Carrasco,+34 704 36 64 19,pbernal@gmail.com
+20,Custodia Sala Valdés,+34 899718446,recheverria@alberto.es
+21,Sancho Ordóñez Sales,+34 740 16 42 21,onavarrete@yahoo.com
+22,Roldán Mateo Vaquero,+34748 763 048,pazseveriano@hotmail.com
+23,Édgar Anaya,+34707946477,salomoncerezo@calderon-aragones.es
+24,Teófila Doménech,+34 712 547 978,gluis@gmail.com
+25,Rafa Vilar Vilaplana,+34 702 66 72 45,cepedacatalina@herrera-canete.org
+26,Amanda Mancebo-Peñalver,+34 702 269 650,amorperalta@muniz-azcona.org
+27,Elodia Ramos Rey,+34 631138715,ocanaruperta@toledo.com
+28,Nicanor Salvador,+34729 41 63 80,evilla@checa.org
+29,Urbano Barceló-Valverde,+34848541248,kbarral@yahoo.com
+30,Dolores Bustamante Tovar,+34 843263003,bazcona@pedraza.net
+31,Yéssica Rosa Roselló,+34 718 62 24 16,mcuevas@cabrera.es
+32,Guadalupe del Gálvez,+34 919838296,vasenjo@lerma.es
+33,Sol Almazán,+34 742694659,tlinares@luna-isern.com
+34,Lalo Pulido Álamo,+34 991 17 76 44,zaraujo@tomas.com
+35,Candelario Vicens-Hernando,+34716726864,jesus30@ayuso-herranz.es
+36,Iker González,+34960 742 522,elodiallado@yahoo.com
+37,Ruben del Gálvez,+34718934386,nydialastra@otero.net
+38,Ale Rebollo Gelabert,+34748953481,reyna21@gabaldon.com
+39,Heliodoro Prat Hidalgo,+34946863009,danielatorrens@cardona-viana.es
+40,Claudia Planas Menendez,+34734 08 97 40,tiradojose-manuel@hotmail.com
+41,Rufino Barros,+34747906138,salvadorvelez@hotmail.com
+42,Jaime del Lara,+34 694 620 012,torrentildefonso@anaya.es
+43,Che Pinto Manzano,+34733 905 640,odalisantunez@hotmail.com
+44,Alejo Sarmiento-Ugarte,+34 724543849,albanolarranaga@gmail.com
+45,Lupita Sáenz Rivas,+34975 23 60 80,edelmiro81@yahoo.com
+46,Corona Duque Soria,+34728 40 70 38,violeta13@aguilar.es
+47,Joaquina Simó Arias,+34 648 45 49 87,lermaelpidio@gmail.com
+48,Juanito Andreu Suarez,+34 632 47 96 08,porfiriogarces@guitart-marques.com
+49,Mauricio Goñi Doménech,+34 916 93 91 61,nerea63@yahoo.com
+50,Nilda Nieto Fuente,+34957 77 83 93,marinavalera@hotmail.com
+51,Reyes Sanmartín Cal,+34 731527162,spalomar@cornejo.com
+52,Jordi Pozuelo Ayuso,+34723 961 109,figueroajose-miguel@gmail.com
+53,Candelas Martorell Chacón,+34 703693557,pepe37@leiva-anguita.com
+54,Mario Arregui Iglesias,+34705 878 393,escrivaamor@pineiro.net
+55,Ale Ribes Molina,+34 722 191 152,custodiobenitez@yahoo.com
+56,Patricio Severo Folch Hernandez,+34 621 704 158,carvajaljoaquin@vara.es
+57,Noé Barros Sevilla,+34 696 58 21 92,pmorales@yahoo.com
+58,Nélida Agustina Galán Morera,+34 701 600 762,yaizahierro@mendoza-avila.com
+59,Coral Larrea-Mayol,+34716130988,candida91@neira.com
+60,Américo Rodríguez Becerra,+34895 78 23 57,fvillar@hotmail.com
+61,Efraín Toribio Urrutia Serrano,+34740819184,martirenato@hotmail.com
+62,Zaira Moreno Mateos,+34 713 727 393,calistasuarez@barrena-estevez.es
+63,Blanca de Anaya,+34729 020 105,fbarrena@hotmail.com
+64,Prudencia Canales Benavides,+34 713976994,natividad08@gmail.com
+65,Heriberto Bejarano Macías,+34 745 25 12 22,vito75@alvarado.net
+66,Charo Castro Baró,+34 700 65 63 79,hvillalobos@noriega-ariza.es
+67,Dalila Valcárcel-Fabregat,+34 851179650,mariapeinado@frias.com
+68,Margarita Quero Pareja,+34 702 828 346,maritaroldan@valcarcel.com
+69,Encarnación Arce Castelló,+34 722 131 784,maximomariscal@yahoo.com
+70,Rebeca Agustín Carrera,+34 745 79 46 22,nogueraaurelia@zurita-iniesta.com
+71,Pío Mendoza Guillén,+34729 249 756,dalcaraz@gmail.com
+72,Maximiano del Tapia,+34717 287 494,maridaniela@yahoo.com
+73,Alejo Octavio Roca Amaya,+34 723243491,maria-fernandacanales@hotmail.com
+74,Domitila Company Lloret,+34715 47 16 36,otiliafranco@gmail.com
+75,Jafet Cañellas Nadal,+34 747 27 59 65,abraham27@yahoo.com
+76,Adelia Pinedo Ribes,+34 739251597,eduguijarro@gmail.com
+77,David de Bartolomé,+34 723 382 479,julianamayoral@cabanillas.com
+78,Adán Onofre Amador Mendez,+34617 41 31 10,ruben51@yahoo.com
+79,Eloy Salvador Rosales,+34 711715988,goyo29@alberto.com
+80,Leonor Quintana Cuervo,+34 971258727,cmendez@yahoo.com
+81,Luis Ángel Cervera Giner,+34634 64 74 19,aragonflavio@gmail.com
+82,Prudencio Barroso Calvet,+34 728 03 35 95,moranesteban@gomila.org
+83,Joaquín Lloret Valencia,+34 740 61 89 37,nquiroga@serrano-aguado.es
+84,Eduardo Vázquez Sotelo,+34 747 504 895,salvadorlazaro@gmail.com
+85,Juan Antonio Andrade Gomila,+34 950 756 722,tgalan@mur.com
+86,María Jesús de Alberola,+34624 521 611,wbelmonte@mugica.es
+87,Telmo Jose Ramón Navarrete Lloret,+34731 59 57 03,samuugarte@yahoo.com
+88,Joaquina Mesa Querol,+34724 50 25 31,purificacion44@gmail.com
+89,Fabio de Sola,+34974 979 934,marianelanogues@noriega.es
+90,Dolores Cabañas Gibert,+34717 092 446,isidrobejarano@gmail.com
+91,Emiliana de Giner,+34 965 78 08 52,pacobaeza@gmail.com
+92,Tamara del Torrents,+34 911 19 06 49,rubengaray@gmail.com
+93,Anastasia Llamas Checa,+34745813412,valeria36@gmail.com
+94,Domingo Revilla,+34 844 360 675,guardiolarocio@cuevas-padilla.es
+95,Paulino Lobato Tur,+34701 42 19 39,carbonellnacio@yahoo.com
+96,Emperatriz Quintero Ibáñez,+34643209537,badiaolga@miro.net
+97,Marino Cisneros Anaya,+34735 81 03 85,spalmer@yahoo.com
+98,Lara de Ferrer,+34706 538 935,manu51@yahoo.com
+99,Alicia Villalobos Márquez,+34991 473 793,psaldana@gmail.com
+100,Eduardo Escamilla Izaguirre,+34 716 21 87 71,bgracia@ariza-belmonte.com
