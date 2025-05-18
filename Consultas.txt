@@ -15,4 +15,10 @@ Consultas Realizadas en el trabajo:
     FROM "Hechos_Ordenes"
     WHERE EXTRACT(YEAR FROM "Fecha") = %s;
 
-3) Consigue cuánto se vende por mes:
+3) Extrae el promedio de venta por mes:
+
+  SELECT EXTRACT(MONTH FROM "Fecha") AS mes, AVG("Total") AS venta_promedio
+      FROM "Hechos_Ordenes"
+      WHERE EXTRACT(YEAR FROM "Fecha") = %s
+      GROUP BY mes
+      ORDER BY mes;
