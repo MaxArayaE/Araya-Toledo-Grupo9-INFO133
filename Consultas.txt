@@ -1,0 +1,18 @@
+Consultas Realizadas en el trabajo:
+  
+ 1) Entrega Cuáles fueron los platillos más pedidos en un año específico:
+
+  SELECT P."Nombre", SUM(H."Cantidad") AS total_pedidos
+    FROM "Hechos_Ordenes" H
+    JOIN "Platillos" P ON H."Id_platillo" = P."Id_platillo"
+    WHERE EXTRACT(YEAR FROM H."Fecha") = %s
+    GROUP BY P."Nombre"
+    ORDER BY total_pedidos DESC;
+
+2) Consigue los dias de mayor demanda a la semana:
+
+  SELECT EXTRACT(DOW FROM "Fecha") AS dia_semana
+    FROM "Hechos_Ordenes"
+    WHERE EXTRACT(YEAR FROM "Fecha") = %s;
+
+3) Consigue cuánto se vende por mes:
