@@ -2,19 +2,33 @@ import psycopg2
 import matplotlib.pyplot as plt
 import pandas
 import os
+import sys
+from dotenv import load_dotenv
 
-def main():
-    #Conección a la Base de Datos, En caso de ser usado en tú computador, cambia las credenciales de abajo
-    conn = psycopg2.connect(host="172.27.162.97", dbname="restaurantes", user="maxaraya", password="maximox12", port="5432")
+def main(anno):
+    print(f"Analizando el año {anno}")
+
+    #Se cargan los datos del .env
+    load_dotenv()
+
+    datos_bd={ 
+        "host": os.getenv("DB_HOST"),
+        "port": os.getenv("DB_PORT"),
+        "dbname": os.getenv("DB_NAME"),
+        "user": os.getenv("DB_USER"),
+        "password": os.getenv("DB_PASSWORD"),
+        }
+
+    #Conección a la Base de Datos.
+    conn = psycopg2.connect(datos_bd)
     
-    platillosMasSolicitados(2025, conn)
-    diasDeMayorDemanda(2025,conn)
+    platillosMasSolicitados(anno, conn)
+    diasDeMayorDemanda(anno,conn)
     
-    #Se cierra la conección a la base de datos
     conn.close()
 
 #Esta función recibe el año deseado y la conección a la base de datos, retorna un gráfico de barras con las estadísticas de cada platillo pedido en el año
-def platillosMasSolicitados(año, conn):
+def platillosMasSolicitados(anno, conn):
     #Se crea el cursor para manipular las consultas
     cursor = conn.cursor()
 
@@ -27,7 +41,7 @@ def platillosMasSolicitados(año, conn):
     ORDER BY total_pedidos DESC;
     '''
     #Se le dice a la bd que ejecute el script
-    cursor.execute(consulta, (año,))
+    cursor.execute(consulta, (anno,))
     resultados = cursor.fetchall()
 
     #Se cierra el cursor
@@ -35,7 +49,7 @@ def platillosMasSolicitados(año, conn):
 
     #Se asegura de que existan datos para el año solicitado
     if not resultados:
-        print(f"No se encontraron pedidos para el año {año}.")
+        print(f"No se encontraron pedidos para el año {anno}.")
         return
 
     # Convertir resultados a DataFrame
@@ -44,7 +58,7 @@ def platillosMasSolicitados(año, conn):
     # Graficar
     plt.figure(figsize=(10, 6))
     plt.bar(df["Platillo"], df["Cantidad"], color="salmon")
-    plt.title(f"Platillos más solicitados en {año}")
+    plt.title(f"Platillos más solicitados en {anno}")
     plt.xlabel("Platillo")
     plt.ylabel("Cantidad Pedida")
     plt.xticks(rotation=45, ha="right")
@@ -56,7 +70,7 @@ def platillosMasSolicitados(año, conn):
     plt.close()
 
 #Esta función recibe el año deseado y la conección a la base de datos, retorna un gráfico de torta con el porcentaje de demanda de los días en el año
-def diasDeMayorDemanda(año, conn):
+def diasDeMayorDemanda(anno, conn):
     #Se crea el cursor para manipular las consultas
     cursor = conn.cursor()
 
@@ -66,7 +80,7 @@ def diasDeMayorDemanda(año, conn):
     WHERE EXTRACT(YEAR FROM "Fecha") = %s;
     '''
     #Se le dice a la bd que ejecute el script
-    cursor.execute(consulta, (año,))
+    cursor.execute(consulta, (anno,))
     resultados = cursor.fetchall()
 
     #Se cierra el cursor
@@ -74,7 +88,7 @@ def diasDeMayorDemanda(año, conn):
 
     #Se asegura que existan datos para el año solicitado
     if not resultados:
-        print(f"No se encontraron pedidos para el año {año}.")
+        print(f"No se encontraron pedidos para el año {anno}.")
         return
 
     # Convertir resultados a DataFrame
@@ -98,7 +112,7 @@ def diasDeMayorDemanda(año, conn):
     # Crear el gráfico de torta
     plt.figure(figsize=(8, 8))
     plt.pie(conteo_dias, labels=None, autopct='%1.1f%%', startangle=140)
-    plt.title(f"Días de mayor demanda en {año}")
+    plt.title(f"Días de mayor demanda en {anno}")
     plt.axis('equal')
 
     #Guía de colores en la imagen
@@ -111,4 +125,8 @@ def diasDeMayorDemanda(año, conn):
     plt.close()
 
 if __name__ == "__main__":
-    main()
+    if sys.argv != 2025 or sys.argv != 2024:
+        print("Por favor, proporciona un año como argumento.")
+    else:
+        anio_param = sys.argv[1]
+        main(anio_param)
