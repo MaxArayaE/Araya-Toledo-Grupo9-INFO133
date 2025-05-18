@@ -20,10 +20,11 @@ def main(anno):
         }
 
     #Conección a la Base de Datos.
-    conn = psycopg2.connect(datos_bd)
+    conn = psycopg2.connect(**datos_bd)
     
     platillosMasSolicitados(anno, conn)
-    diasDeMayorDemanda(anno,conn)
+    diasDeMayorDemanda(anno, conn)
+    ventaPromedioMensual(anno, conn)
     
     conn.close()
 
@@ -65,7 +66,7 @@ def platillosMasSolicitados(anno, conn):
     plt.tight_layout()
     
     #Guardado de la Imagen
-    guardado = os.path.join('Gráficos_Resultados', 'Platillos_Más_Pedidos')
+    guardado = os.path.join('Gráficos_Resultados', f'Analisis_platillos_más_pedidos_{anno}')
     plt.savefig(guardado)
     plt.close()
 
@@ -120,12 +121,50 @@ def diasDeMayorDemanda(anno, conn):
     plt.tight_layout()
 
     # Guardado de la Imagen
-    guardado = os.path.join('Gráficos_Resultados', 'Dias_De_Mayor_Demanda')
+    guardado = os.path.join('Gráficos_Resultados', f'Analisis_dias_de_mayor_demanda_{anno}')
+    plt.savefig(guardado)
+    plt.close()
+
+def ventaPromedioMensual(anno, conn):
+    query = f"""
+        SELECT 
+            EXTRACT(MONTH FROM "Fecha") AS mes,
+            AVG("Total") AS venta_promedio
+        FROM 
+            "Hechos_Ordenes"
+        WHERE 
+            EXTRACT(YEAR FROM "Fecha") = %s
+        GROUP BY 
+            mes
+        ORDER BY 
+            mes;
+    """
+
+    df = pandas.read_sql(query, conn, params=(anno,))
+
+    # Nombres de los meses para mejor presentación
+    meses = [
+        "Ene", "Feb", "Mar", "Abr", "May", "Jun", 
+        "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+    ]
+
+    # Graficar
+    plt.figure(figsize=(10, 6))
+    plt.plot(df["mes"], df["venta_promedio"], marker='o', linestyle='-', color='teal')
+    plt.xticks(df["mes"], [meses[int(m) - 1] for m in df["mes"]])
+    plt.title(f"Venta Promedio Mensual en {anno}")
+    plt.xlabel("Mes")
+    plt.ylabel("Venta Promedio ($)")
+    plt.grid(True)
+    plt.tight_layout()
+    
+    # Guardado de la Imagen
+    guardado = os.path.join('Gráficos_Resultados', f'Analisis_venta_Por_mes_{anno}')
     plt.savefig(guardado)
     plt.close()
 
 if __name__ == "__main__":
-    if sys.argv != 2025 or sys.argv != 2024:
+    if len(sys.argv) != 2:
         print("Por favor, proporciona un año como argumento.")
     else:
         anio_param = sys.argv[1]
