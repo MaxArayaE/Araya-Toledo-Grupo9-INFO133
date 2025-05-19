@@ -28,17 +28,18 @@ Puedes descargarlo desde [python.org](https://www.python.org/).
 - Pandas
 - Matplotlib
 - Psycopg2
+- Python-dotenv
 
 Instálalas usando `pip` si estas usando un entorno de linux (recomendado):
 
 ```bash
-pip install pandas matplotlib psycopg2
+pip install pandas matplotlib python-dotenv psycopg2 
 ```
 
 Si no usa:
 
 ```bash
-pip install pandas matplotlib psycopg2-binary
+pip install pandas matplotlib python-dotenv psycopg2-binary
 ```
 
 ## 3. Preparar la Base de Datos
@@ -102,6 +103,6 @@ En la terminal del directorio del repositorio clonado ejecuta `analisis.py` con 
 python analisis.py 2024
 ```
 
-En la carpeta `Gráficos_Resultados` encontraras los gráficos en formato png de las consultas mencionadas en el punto 1.
+En la carpeta `Gráficos_Resultados` con su respectivo año, encontraras los gráficos en formato png de las consultas mencionadas en el punto 1.
 
 
