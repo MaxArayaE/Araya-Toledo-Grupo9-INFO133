@@ -1,11 +1,11 @@
-Consultas Realizadas en el trabajo:
+Consultas Realizadas en el trabajo, (estan con el año 2024 como ejemplo):
   
- 1) Entrega Cuáles fueron los platillos más pedidos en un año específico:
+ 1) Entrega Cuáles fueron los platillos más pedidos en un año específico, los agrupa por nombre y los ordena por su total de pedidos:
 
   SELECT P."Nombre", SUM(H."Cantidad") AS total_pedidos
     FROM "Hechos_Ordenes" H
     JOIN "Platillos" P ON H."Id_platillo" = P."Id_platillo"
-    WHERE EXTRACT(YEAR FROM H."Fecha") = %s
+    WHERE EXTRACT(YEAR FROM H."Fecha") = 2024
     GROUP BY P."Nombre"
     ORDER BY total_pedidos DESC;
 
@@ -13,12 +13,38 @@ Consultas Realizadas en el trabajo:
 
   SELECT EXTRACT(DOW FROM "Fecha") AS dia_semana
     FROM "Hechos_Ordenes"
-    WHERE EXTRACT(YEAR FROM "Fecha") = %s;
+    WHERE EXTRACT(YEAR FROM "Fecha") = 2024;
 
-3) Extrae el promedio de venta por mes:
+3) Extrae el promedio de venta, las agrupa y las ordena por mes:
 
   SELECT EXTRACT(MONTH FROM "Fecha") AS mes, AVG("Total") AS venta_promedio
       FROM "Hechos_Ordenes"
-      WHERE EXTRACT(YEAR FROM "Fecha") = %s
+      WHERE EXTRACT(YEAR FROM "Fecha") = 2024
       GROUP BY mes
       ORDER BY mes;
+
+4) Extrae el promedio de personas por reserva y las agrupa y ordena por mes:
+
+  SELECT DATE_TRUNC('month', "Fecha") AS mes, AVG("Cantidad") AS promedio_personas
+        FROM "Reservas"
+        WHERE EXTRACT(YEAR FROM "Fecha") = 2024
+        GROUP BY mes
+        ORDER BY mes;
+
+5) Extrae los ingresos totales de los metodos de pago al año, los agrupa por nombre y los ordena por total de ingresos:
+
+  SELECT mp."Metodo", SUM(ho."Total") AS total_ingresos
+        FROM "Hechos_Ordenes" ho
+        JOIN "MetodoPago" mp ON ho."Id_metodo" = mp."Id_metodo"
+        WHERE EXTRACT(YEAR FROM ho."Fecha") = 2024
+        GROUP BY mp."Metodo"
+        ORDER BY total_ingresos DESC;
+
+6) Extrae los platillos y sus ingresos anuales, los agrupa por nombre y los ordena por el total de ingresos:
+
+  SELECT P."Nombre", SUM(H."Cantidad" * H."Precio_unitario") AS ingresos
+    FROM "Hechos_Ordenes" H
+    JOIN "Platillos" P ON H."Id_platillo" = P."Id_platillo"
+    WHERE EXTRACT(YEAR FROM H."Fecha") = 2024
+    GROUP BY P."Nombre"
+    ORDER BY ingresos DESC;
