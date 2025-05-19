@@ -18,6 +18,9 @@ def main(anno):
         "user": os.getenv("DB_USER"),
         "password": os.getenv("DB_PASSWORD"),
         }
+    
+    #Crea carpeta si no existe, para guardar los gráficos
+    os.makedirs('Gráficos_Resultados', exist_ok=True)
 
     #Conección a la Base de Datos.
     conn = psycopg2.connect(**datos_bd)
@@ -30,6 +33,7 @@ def main(anno):
 
 #Esta función recibe el año deseado y la conección a la base de datos, retorna un gráfico de barras con las estadísticas de cada platillo pedido en el año
 def platillosMasSolicitados(anno, conn):
+    
     #Se crea el cursor para manipular las consultas
     cursor = conn.cursor()
 
@@ -65,10 +69,12 @@ def platillosMasSolicitados(anno, conn):
     plt.xticks(rotation=45, ha="right")
     plt.tight_layout()
     
-    #Guardado de la Imagen
-    guardado = os.path.join('Gráficos_Resultados', f'Analisis_platillos_más_pedidos_{anno}')
+    #Guardado de la imagen
+    guardado = os.path.join('Gráficos_Resultados', f'Analisis_platillos_más_solicitados_año_{anno}.png')
     plt.savefig(guardado)
     plt.close()
+
+    print(f"Gráfico guardado en: {guardado}")
 
 #Esta función recibe el año deseado y la conección a la base de datos, retorna un gráfico de torta con el porcentaje de demanda de los días en el año
 def diasDeMayorDemanda(anno, conn):
@@ -119,36 +125,42 @@ def diasDeMayorDemanda(anno, conn):
     #Guía de colores en la imagen
     plt.legend(conteo_dias.index, title="Días de la Semana", loc="best")
     plt.tight_layout()
-
-    # Guardado de la Imagen
-    guardado = os.path.join('Gráficos_Resultados', f'Analisis_dias_de_mayor_demanda_{anno}')
+    
+    #Guardado de la imagen
+    guardado = os.path.join('Gráficos_Resultados', f'Analisis_día_mayor_demanda_{anno}.png')
     plt.savefig(guardado)
     plt.close()
 
+    print(f"Gráfico guardado en: {guardado}")
+
 def ventaPromedioMensual(anno, conn):
-    query = f"""
-        SELECT 
-            EXTRACT(MONTH FROM "Fecha") AS mes,
-            AVG("Total") AS venta_promedio
-        FROM 
-            "Hechos_Ordenes"
-        WHERE 
-            EXTRACT(YEAR FROM "Fecha") = %s
-        GROUP BY 
-            mes
-        ORDER BY 
-            mes;
+
+    #Se habre el cursor a la conexión
+    cursor = conn.cursor()
+    consulta = """
+        SELECT EXTRACT(MONTH FROM "Fecha") AS mes, AVG("Total") AS venta_promedio
+        FROM "Hechos_Ordenes"
+        WHERE EXTRACT(YEAR FROM "Fecha") = %s
+        GROUP BY mes
+        ORDER BY mes;
     """
+    cursor.execute(consulta, (anno,))
+    resultados = cursor.fetchall()
+    cursor.close()
 
-    df = pandas.read_sql(query, conn, params=(anno,))
+    #Nos aseguramos de la existencia de datos
+    if not resultados:
+        print(f"No se encontraron pedidos para el año {anno}.")
+        return
+    
+    #Se genera el dataframe de los datos
+    df = pandas.DataFrame(resultados, columns=["mes", "venta_promedio"])
 
-    # Nombres de los meses para mejor presentación
-    meses = [
-        "Ene", "Feb", "Mar", "Abr", "May", "Jun", 
-        "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
-    ]
+    #Mapeo de los meses del año
+    meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", 
+             "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
 
-    # Graficar
+    #Generamos el gráfico
     plt.figure(figsize=(10, 6))
     plt.plot(df["mes"], df["venta_promedio"], marker='o', linestyle='-', color='teal')
     plt.xticks(df["mes"], [meses[int(m) - 1] for m in df["mes"]])
@@ -158,10 +170,12 @@ def ventaPromedioMensual(anno, conn):
     plt.grid(True)
     plt.tight_layout()
     
-    # Guardado de la Imagen
-    guardado = os.path.join('Gráficos_Resultados', f'Analisis_venta_Por_mes_{anno}')
+    #Guardado de la imagen
+    guardado = os.path.join('Gráficos_Resultados', f'Analisis_venta_Por_mes_{anno}.png')
     plt.savefig(guardado)
     plt.close()
+
+    print(f"Gráfico guardado en: {guardado}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
