@@ -1,5 +1,7 @@
 # Analisis de restaurante "El Campesino"
 
+## Se han utilizado datos dummy por cuestiones de tiempo
+
 ## 1. Como funciona?
  El programa (`analisis.py`) se encarga generar gráficos para las siguientes preguntas de un año especifico:
 
