@@ -8,7 +8,7 @@
  * ¿Cuánto se vende al mes?
  * (faltan añadir 3)
 
-Los gráficos resultantes son almacenados en la carpeta (`Gráficos_Resultados`) en formato png
+Los gráficos resultantes son almacenados en la carpeta (`Gráficos_Resultados`),que es generada en caso de no existir, en formato png.
 
 ## 2. Prerrequsitos del programa:
 
