@@ -6,7 +6,9 @@
  * ¿Cuáles fueron los platillos más pedidos en un año específico?
  * ¿Qué días hay mayor demanda?
  * ¿Cuánto se vende al mes?
- * (faltan añadir 3)
+ * ¿Cuántas personas en promedio hay por reserva?
+ * ¿Cuántos ingresos hay por metodo de pago utilizado?
+ * ¿Cuántos ingresos generan los platillos pedidos anualmente?
 
 Los gráficos resultantes son almacenados en la carpeta (`Gráficos_Resultados`),que es generada en caso de no existir, en formato png.
 
@@ -30,16 +32,16 @@ Puedes descargarlo desde [python.org](https://www.python.org/).
 - Psycopg2
 - Python-dotenv
 
-Instálalas usando `pip` si estas usando un entorno de linux (recomendado):
-
-```bash
-pip install pandas matplotlib python-dotenv psycopg2 
-```
-
-Si no usa:
+Instálalas usando `pip` si estas usando un entorno de windows:
 
 ```bash
 pip install pandas matplotlib python-dotenv psycopg2-binary
+```
+
+Si no, puedes usar:
+
+```bash
+pip install pandas matplotlib python-dotenv psycopg2
 ```
 
 ## 3. Preparar la Base de Datos
@@ -104,5 +106,9 @@ python analisis.py 2024
 ```
 
 En la carpeta `Gráficos_Resultados` con su respectivo año, encontraras los gráficos en formato png de las consultas mencionadas en el punto 1.
+
+## Diagrama de la Base de Datos:
+
+![Diagrama](DiagramaBD.png)
 
 
