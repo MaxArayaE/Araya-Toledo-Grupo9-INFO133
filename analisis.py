@@ -22,9 +22,10 @@ def main(anno):
     #Crea carpeta si no existe, para guardar los gráficos
     os.makedirs(f'Gráficos_Resultados_{anno}', exist_ok=True)
 
-    #Conección a la Base de Datos.
+    #Conexión a la Base de Datos.
     conn = psycopg2.connect(**datos_bd)
     
+    #Llamado a las funciones que crean los gráficos
     platillosMasSolicitados(anno, conn)
     diasDeMayorDemanda(anno, conn)
     ventaPromedioMensual(anno, conn)
@@ -32,15 +33,14 @@ def main(anno):
     ingresosPorMetodoPago(anno, conn)
     promedioMensualPersonasPorReserva(anno, conn)
     
-    
+    #Se cierra la conexión
     conn.close()
 
-#Esta función recibe el año deseado y la conección a la base de datos, retorna un gráfico de barras con las estadísticas de cada platillo pedido en el año
+#Esta función recibe el año deseado y la conexión a la base de datos, retorna un gráfico de barras con las estadísticas de cada platillo pedido en el año
 def platillosMasSolicitados(anno, conn):
     
-    #Se crea el cursor para manipular las consultas
+    #Se consulta a la BD
     cursor = conn.cursor()
-
     consulta = '''
     SELECT P."Nombre", SUM(H."Cantidad") AS total_pedidos
     FROM "Hechos_Ordenes" H
@@ -49,11 +49,8 @@ def platillosMasSolicitados(anno, conn):
     GROUP BY P."Nombre"
     ORDER BY total_pedidos DESC;
     '''
-    #Se le dice a la bd que ejecute el script
     cursor.execute(consulta, (anno,))
     resultados = cursor.fetchall()
-
-    #Se cierra el cursor
     cursor.close()
 
     #Se asegura de que existan datos para el año solicitado
@@ -61,10 +58,10 @@ def platillosMasSolicitados(anno, conn):
         print(f"No se encontraron pedidos para el año {anno}.")
         return
 
-    # Convertir resultados a DataFrame
+    #Convertir resultados a DataFrame
     df = pandas.DataFrame(resultados, columns=["Platillo", "Cantidad"])
 
-    # Graficar
+    #Se genera el gráfico
     plt.figure(figsize=(10, 6))
     plt.bar(df["Platillo"], df["Cantidad"], color="salmon")
     plt.title(f"Platillos más solicitados en {anno}")
@@ -80,9 +77,9 @@ def platillosMasSolicitados(anno, conn):
 
     print(f"Gráfico guardado en: {guardado}")
 
-#Esta función recibe el año deseado y la conección a la base de datos, retorna un gráfico de torta con el porcentaje de demanda de los días en el año
+#Esta función recibe el año deseado y la conexión a la base de datos, retorna un gráfico de torta con el porcentaje de demanda de los días en el año
 def diasDeMayorDemanda(anno, conn):
-    #Se crea el cursor para manipular las consultas
+    #Se le consulta a la BD
     cursor = conn.cursor()
 
     consulta = '''
@@ -90,11 +87,9 @@ def diasDeMayorDemanda(anno, conn):
     FROM "Hechos_Ordenes"
     WHERE EXTRACT(YEAR FROM "Fecha") = %s;
     '''
-    #Se le dice a la bd que ejecute el script
     cursor.execute(consulta, (anno,))
     resultados = cursor.fetchall()
 
-    #Se cierra el cursor
     cursor.close()
 
     #Se asegura que existan datos para el año solicitado
@@ -102,7 +97,7 @@ def diasDeMayorDemanda(anno, conn):
         print(f"No se encontraron pedidos para el año {anno}.")
         return
 
-    # Convertir resultados a DataFrame
+    #Convertir resultados a DataFrame
     df = pandas.DataFrame(resultados, columns=["dia_semana"])
 
     #Se le asigna un ID al día
@@ -117,7 +112,7 @@ def diasDeMayorDemanda(anno, conn):
     }
     df["nombre_dia"] = df["dia_semana"].map(mapeo_dias)
 
-    # Contar la frecuencia de cada día de la semana
+    #Contar la frecuencia de cada día de la semana
     conteo_dias = df["nombre_dia"].value_counts()
 
     # Crear el gráfico de torta
@@ -137,6 +132,7 @@ def diasDeMayorDemanda(anno, conn):
 
     print(f"Gráfico guardado en: {guardado}")
 
+#Esta funcion recibe el año y la conexión a la Base de Datos, retorna el gráfico de la venta promedio por mes
 def ventaPromedioMensual(anno, conn):
 
     #Se habre el cursor a la conexión
@@ -181,7 +177,9 @@ def ventaPromedioMensual(anno, conn):
 
     print(f"Gráfico guardado en: {guardado}")
 
+#Esta funcion recibe el año y la conexión a la Base de Datos, retorna el gráfico del promedio de personas por reserva al mes
 def promedioMensualPersonasPorReserva(anno, conn):
+    #Se realiza consulta a la BD
     cursor = conn.cursor()
     consulta = """
         SELECT DATE_TRUNC('month', "Fecha") AS mes, AVG("Cantidad") AS promedio_personas
@@ -199,11 +197,13 @@ def promedioMensualPersonasPorReserva(anno, conn):
         print(f"No se encontraron reservas para el año {anno}.")
         return
 
+    #Crear DataFrame
     df = pandas.DataFrame(resultados, columns=["mes", "promedio_personas"])
     
     meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", 
              "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
-
+    
+    #Se genera el Gráfico
     plt.figure(figsize=(10, 6))
     plt.plot(range(len(df)), df["promedio_personas"], marker='o', linestyle='-', color='darkorange')
     plt.xticks(ticks=range(len(df)), labels=[meses[m.month - 1] for m in df["mes"]])
@@ -213,13 +213,16 @@ def promedioMensualPersonasPorReserva(anno, conn):
     plt.grid(True)
     plt.tight_layout()
 
+    #Guardado del Gráfico
     guardado = os.path.join(f'Gráficos_Resultados_{anno}', f'Analisis_promedio_Personas_Reserva_Mensual_{anno}.png')
     plt.savefig(guardado)
     plt.close()
     
     print(f"Gráfico guardado en: {guardado}")
 
+#Esta funcion recibe el año y la conexión a la Base de Datos, retorna el gráfico de ingresos por metodos de pago
 def ingresosPorMetodoPago(anno, conn):
+    #Se consulta a la BD
     cursor = conn.cursor()
     consulta = """
         SELECT mp."Metodo", SUM(ho."Total") AS total_ingresos
@@ -237,27 +240,27 @@ def ingresosPorMetodoPago(anno, conn):
         print(f"No se encontraron ingresos para el año {anno}.")
         return
 
-    # Crear DataFrame con nombres de método de pago
+    #Crear DataFrame
     df = pandas.DataFrame(resultados, columns=["Método de Pago", "Ingresos"])
 
-    # Gráfico de barras horizontales
+    #Gráfico de barras horizontales
     plt.figure(figsize=(10, 6))
     bars = plt.barh(df["Método de Pago"], df["Ingresos"], color="mediumseagreen")
 
-    # Título y etiquetas
+    #Título y etiquetas
     plt.title(f"Ingresos por Método de Pago en {anno}")
     plt.xlabel("Ingresos ($)")
     plt.ylabel("Método de Pago")
     plt.grid(axis='x', linestyle='--', alpha=0.5)
 
-    # Etiquetas eje X con formato chileno
+    #Etiquetas eje X con formato chileno
     max_val = df["Ingresos"].max()
     pasos = 5
     ticks = [int(max_val * i / pasos) for i in range(pasos + 1)]
     etiquetas = [f"${x:,.0f}".replace(",", ".") for x in ticks]
     plt.xticks(ticks, etiquetas)
 
-    # Mostrar valores dentro de las barras
+    #Mostrar valores dentro de las barras
     for bar in bars:
         width = bar.get_width()
         etiqueta = f"${width:,.0f}".replace(",", ".")
@@ -266,14 +269,16 @@ def ingresosPorMetodoPago(anno, conn):
 
     plt.tight_layout()
 
-    # Guardar el gráfico
+    #Guardar el gráfico
     guardado = os.path.join(f'Gráficos_Resultados_{anno}', f'Analisis_ingresos_Por_Metodo_Pago_{anno}.png')
     plt.savefig(guardado)
     plt.close()
 
     print(f"Gráfico guardado en: {guardado}")
 
+#Esta funcion recibe el año y la conexión a la Base de Datos, retorna el gráfico de los ingresos por platillo al año
 def ingresosPorPlatillo(anno, conn):
+    #Consulta a la BD
     cursor = conn.cursor()
 
     consulta = '''
@@ -293,7 +298,10 @@ def ingresosPorPlatillo(anno, conn):
         print(f"No se encontraron ingresos para el año {anno}.")
         return
 
+    #Se genera Dataframe
     df = pandas.DataFrame(resultados, columns=["Platillo", "Ingresos"])
+    
+    #Se crea el gráfico
     plt.figure(figsize=(10, 6))
     bars = plt.bar(df["Platillo"], df["Ingresos"], color="green")
     plt.title(f"Ingresos por platillo en {anno}")
