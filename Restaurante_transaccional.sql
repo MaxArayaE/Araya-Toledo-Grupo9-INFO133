@@ -55,7 +55,7 @@ CREATE TABLE "EstadoReserva" (
   "Estado" varchar
 );
 
-CREATE TABLE "Ubicacion" (
+CREATE TABLE "Ubicaciones" (
   "Id_ubicacion" int PRIMARY KEY,
   "Ubicacion_local" varchar
 );
@@ -67,7 +67,7 @@ CREATE TABLE "Garzones" (
   "Correo_garzon" text
 );
 
-ALTER TABLE "Mesas" ADD FOREIGN KEY ("Ubicacion") REFERENCES "Ubicacion" ("Id_ubicacion");
+ALTER TABLE "Mesas" ADD FOREIGN KEY ("Ubicacion") REFERENCES "Ubicaciones" ("Id_ubicacion");
 
 ALTER TABLE "Reservas" ADD FOREIGN KEY ("Id_cliente") REFERENCES "Clientes" ("Id_cliente");
 
