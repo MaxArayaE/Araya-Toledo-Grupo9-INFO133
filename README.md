@@ -1,25 +1,13 @@
-# Analisis de restaurante "El Campesino"
-
-## Se han utilizado datos dummy por cuestiones de tiempo
+# Menú CRUD de restaurante "El Campesino"
 
 ## 1. Como funciona?
-
-El programa (`analisis.py`) se encarga generar gráficos para las siguientes preguntas de un año especifico:
-
-- ¿Cuáles fueron los platillos más pedidos en un año específico?
-- ¿Qué días hay mayor demanda?
-- ¿Cuánto se vende al mes?
-- ¿Cuántas personas en promedio hay por reserva?
-- ¿Cuántos ingresos hay por metodo de pago utilizado?
-- ¿Cuántos ingresos generan los platillos pedidos anualmente?
-
-Los gráficos resultantes son almacenados en la carpeta (`Gráficos_Resultados`),que es generada en caso de no existir, en formato png.
+Es un display de menu en terminal, tendras una opción por función CRUD sobre Reservas y ventas del restaurante. 
 
 ## 2. Prerrequsitos del programa:
 
 Antes de ejecutar este programa, asegúrate de tener instalado lo siguiente:
 
-### Postgresql (con el servidor instalado y corriendo)
+### Postgresql (con el servicio iniciado y corriendo)
 
 - Si no lo tienes puedes seguir los pasos de [postgresql.org](https://www.postgresql.org/download/)
 
@@ -30,21 +18,20 @@ Antes de ejecutar este programa, asegúrate de tener instalado lo siguiente:
 
 ### Librerías necesarias
 
-- Pandas
-- Matplotlib
+- tabulate
 - Psycopg2
 - Python-dotenv
 
-Instálalas usando `pip` si estas usando un entorno de windows:
+Instálalas usando `pip`, si estas usando un entorno de windows:
 
 ```bash
-pip install pandas matplotlib python-dotenv psycopg2-binary
+pip install tabulate  python-dotenv psycopg2-binary
 ```
 
 Si no, puedes usar:
 
 ```bash
-pip install pandas matplotlib python-dotenv psycopg2
+pip install tabulate python-dotenv psycopg2
 ```
 
 ## 3. Preparar la Base de Datos
@@ -89,24 +76,9 @@ Clona el archivo `.env_credenciales` y nombralo `.env`, en él modifica a tus da
 - DB_USER="miusuario"
 - DB_PASSWORD="miclave"
 
-### 3.4 Ejecuta rellenar.py
+### 4 menu_app.py
 
-Este script rellena los datos en la base de datos, abre una terminal en la carpeta clonada del repositorio, verifica que estas en el directiorio:
+Este script inicializa el menú y podras empezar a usarlo.
+Asegurate de utilizar laopción 9 del menú primeramente para generar los datos en la BD
 
-- "....\INFO133 Restaurantes\Araya-Toledo-Grupo9-INFO133>"
-
-Ejecuta el `rellenar.py` en la terminal:
-
-```bash
-python rellenar.py
-```
-
-## 4 Ejecutar el analisis
-
-En la terminal del directorio del repositorio clonado ejecuta `analisis.py` con el año 2024 o 2025:
-
-```bash
-python analisis.py 2024
-```
-
-En la carpeta `Gráficos_Resultados` con su respectivo año, encontraras los gráficos en formato png de las consultas mencionadas en el punto 1.
+Ingresa la opción que quieras utilizar del menú en el terminal y estás listo.
