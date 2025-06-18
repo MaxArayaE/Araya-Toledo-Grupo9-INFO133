@@ -3,14 +3,15 @@
 ## Se han utilizado datos dummy por cuestiones de tiempo
 
 ## 1. Como funciona?
- El programa (`analisis.py`) se encarga generar gráficos para las siguientes preguntas de un año especifico:
 
- * ¿Cuáles fueron los platillos más pedidos en un año específico?
- * ¿Qué días hay mayor demanda?
- * ¿Cuánto se vende al mes?
- * ¿Cuántas personas en promedio hay por reserva?
- * ¿Cuántos ingresos hay por metodo de pago utilizado?
- * ¿Cuántos ingresos generan los platillos pedidos anualmente?
+El programa (`analisis.py`) se encarga generar gráficos para las siguientes preguntas de un año especifico:
+
+- ¿Cuáles fueron los platillos más pedidos en un año específico?
+- ¿Qué días hay mayor demanda?
+- ¿Cuánto se vende al mes?
+- ¿Cuántas personas en promedio hay por reserva?
+- ¿Cuántos ingresos hay por metodo de pago utilizado?
+- ¿Cuántos ingresos generan los platillos pedidos anualmente?
 
 Los gráficos resultantes son almacenados en la carpeta (`Gráficos_Resultados`),que es generada en caso de no existir, en formato png.
 
@@ -21,11 +22,11 @@ Antes de ejecutar este programa, asegúrate de tener instalado lo siguiente:
 ### Postgresql (con el servidor instalado y corriendo)
 
 - Si no lo tienes puedes seguir los pasos de [postgresql.org](https://www.postgresql.org/download/)
- 
+
 ### Entorno de Python
 
 - Python 3.8 o superior  
-Puedes descargarlo desde [python.org](https://www.python.org/).
+  Puedes descargarlo desde [python.org](https://www.python.org/).
 
 ### Librerías necesarias
 
@@ -63,6 +64,7 @@ En la terminal de postgresql, borra y cambia los parametros entre <> a tu elecci
 CREATE USER <nombre_usuario> WITH PASSWORD <'contraseña_segura'>;
 CREATE DATABASE <mibasededatos> OWNER <nombre_usuario>;
 ```
+
 ### Ejemplo
 
 ```bash
@@ -81,17 +83,17 @@ cd Araya-Toledo-Grupo9-INFO133
 
 Clona el archivo `.env_credenciales` y nombralo `.env`, en él modifica a tus datos con los que creaste la base de datos, para acceder a ella con el programa:
 
-* DB_HOST="localhost"
-* DB_PORT="5432"
-* DB_NAME="midb"
-* DB_USER="miusuario"
-* DB_PASSWORD="miclave"
+- DB_HOST="localhost"
+- DB_PORT="5432"
+- DB_NAME="midb"
+- DB_USER="miusuario"
+- DB_PASSWORD="miclave"
 
 ### 3.4 Ejecuta rellenar.py
 
 Este script rellena los datos en la base de datos, abre una terminal en la carpeta clonada del repositorio, verifica que estas en el directiorio:
 
- * "....\INFO133 Restaurantes\Araya-Toledo-Grupo9-INFO133>" 
+- "....\INFO133 Restaurantes\Araya-Toledo-Grupo9-INFO133>"
 
 Ejecuta el `rellenar.py` en la terminal:
 
@@ -108,9 +110,3 @@ python analisis.py 2024
 ```
 
 En la carpeta `Gráficos_Resultados` con su respectivo año, encontraras los gráficos en formato png de las consultas mencionadas en el punto 1.
-
-## Diagrama de la Base de Datos:
-
-![Diagrama](DiagramaBD.png)
-
-

@@ -15,7 +15,7 @@ datos_bd={
         }
 
 CSV_FOLDER = "Datos de la BD"
-SCHEMA_FILE = "Restaurante.sql"
+SCHEMA_FILE = "Restaurante_transaccional.sql"
 
 conn = psycopg2.connect(**datos_bd)
 
@@ -62,12 +62,15 @@ def insertar_csv(conn, archivo_csv):
 # Orden correcto basado en claves foráneas
 orden_tablas = [
     "Clientes",
+    "Ubicaciones",
     "Mesas",
-    "Reservas",
     "Platillos",
     "MetodoPago",
     "EstadoReserva",
-    "Hechos_Ordenes"
+    "Reservas",
+    "Garzones",
+    "Ventas",
+    "Pedidos"
 ]
 
 # Ejecutar flujo completo
