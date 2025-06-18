@@ -67,20 +67,19 @@ CREATE TABLE "Garzones" (
   "Correo_garzon" text
 );
 
-ALTER TABLE "Mesas" ADD FOREIGN KEY ("Ubicacion") REFERENCES "Ubicaciones" ("Id_ubicacion");
+ALTER TABLE "Mesas"
+  ADD FOREIGN KEY ("Ubicacion") REFERENCES "Ubicaciones" ("Id_ubicacion");
 
-ALTER TABLE "Reservas" ADD FOREIGN KEY ("Id_cliente") REFERENCES "Clientes" ("Id_cliente");
+ALTER TABLE "Reservas"
+  ADD FOREIGN KEY ("Id_cliente") REFERENCES "Clientes" ("Id_cliente"),
+  ADD FOREIGN KEY ("Id_mesa") REFERENCES "Mesas" ("N_Mesa"),
+  ADD FOREIGN KEY ("Id_estado") REFERENCES "EstadoReserva" ("Id_estado");
 
-ALTER TABLE "Reservas" ADD FOREIGN KEY ("Id_mesa") REFERENCES "Mesas" ("N_Mesa");
+ALTER TABLE "Pedidos"
+  ADD FOREIGN KEY ("Id_venta") REFERENCES "Ventas" ("Id_ventas"),
+  ADD FOREIGN KEY ("Id_mesa") REFERENCES "Mesas" ("N_Mesa"),
+  ADD FOREIGN KEY ("Id_platillo") REFERENCES "Platillos" ("Id_platillo");
 
-ALTER TABLE "Reservas" ADD FOREIGN KEY ("Id_estado") REFERENCES "EstadoReserva" ("Id_estado");
-
-ALTER TABLE "Pedidos" ADD FOREIGN KEY ("Id_venta") REFERENCES "Ventas" ("Id_ventas");
-
-ALTER TABLE "Pedidos" ADD FOREIGN KEY ("Id_mesa") REFERENCES "Mesas" ("N_Mesa");
-
-ALTER TABLE "Pedidos" ADD FOREIGN KEY ("Id_platillo") REFERENCES "Platillos" ("Id_platillo");
-
-ALTER TABLE "Ventas" ADD FOREIGN KEY ("Id_metodo") REFERENCES "MetodoPago" ("Id_metodo");
-
-ALTER TABLE "Ventas" ADD FOREIGN KEY ("Id_garzon") REFERENCES "Garzones" ("Id_garzon");
+ALTER TABLE "Ventas"
+  ADD FOREIGN KEY ("Id_metodo") REFERENCES "MetodoPago" ("Id_metodo"),
+  ADD FOREIGN KEY ("Id_garzon") REFERENCES "Garzones" ("Id_garzon");
