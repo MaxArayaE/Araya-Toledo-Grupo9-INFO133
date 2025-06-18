@@ -55,7 +55,7 @@ CREATE TABLE "EstadoReserva" (
   "Estado" varchar
 );
 
-CREATE TABLE "Ubicaciones" (
+CREATE TABLE "Ubicacion" (
   "Id_ubicacion" int PRIMARY KEY,
   "Ubicacion_local" varchar
 );
@@ -67,18 +67,9 @@ CREATE TABLE "Garzones" (
   "Correo_garzon" text
 );
 
-ALTER TABLE "Mesas" ADD FOREIGN KEY ("Ubicacion") REFERENCES "Ubicaciones" ("Id_ubicacion");
+ALTER TABLE "Mesas" ADD FOREIGN KEY ("Ubicacion") REFERENCES "Ubicacion" ("Id_ubicacion");
 
-CREATE TABLE "Clientes_Reservas" (
-  "Clientes_Id_cliente" int,
-  "Reservas_Id_cliente" int,
-  PRIMARY KEY ("Clientes_Id_cliente", "Reservas_Id_cliente")
-);
-
-ALTER TABLE "Clientes_Reservas" ADD FOREIGN KEY ("Clientes_Id_cliente") REFERENCES "Clientes" ("Id_cliente");
-
-ALTER TABLE "Clientes_Reservas" ADD FOREIGN KEY ("Reservas_Id_cliente") REFERENCES "Reservas" ("Id_cliente");
-
+ALTER TABLE "Reservas" ADD FOREIGN KEY ("Id_cliente") REFERENCES "Clientes" ("Id_cliente");
 
 ALTER TABLE "Reservas" ADD FOREIGN KEY ("Id_mesa") REFERENCES "Mesas" ("N_Mesa");
 
