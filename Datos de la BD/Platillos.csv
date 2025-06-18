@@ -1,21 +1,21 @@
 Id_platillo,Nombre,Precio,Descripcion
 1,Pastel de Choclo,10500,Tradicional pastel de choclo con pino de carne y cubierto con una suave pasta de choclo.
-2,Empanada de Pino,3500,Clásica empanada de pino con carne, cebolla, huevo duro y aceituna.
-3,Cazuela de Vacuno,9800,Contundente cazuela con trozos de carne de vacuno, papas, zapallo, choclo y arroz.
-4,Completo Italiano,4200,Hot dog chileno con tomate, palta y mayonesa.
-5,Lomo a lo Pobre,13500,Jugoso lomo de vacuno acompañado de papas fritas, cebolla caramelizada y dos huevos fritos.
-6,Curanto en Olla,15000,Preparación sureña con mariscos, carne, papas y chapaleles, cocinado en olla.
-7,Carbonada,8900,Sopa espesa con carne, papas, zanahoria, zapallo y trozos de fideos.
-8,Charquicán,9200,Guiso con carne, zapallo, papa, choclo, arvejas y porotos verdes.
-9,Porotos con Riendas,8500,Plato típico con porotos, longaniza y tallarines.
+2,Empanada de Pino,3500,Clásica empanada de pino con carne cebolla huevo duro y aceituna.
+3,Cazuela de Vacuno,9800,Contundente cazuela con trozos de carne de vacuno papas zapallo choclo y arroz.
+4,Completo Italiano,4200,Hot dog chileno con tomate palta y mayonesa.
+5,Lomo a lo Pobre,13500,Jugoso lomo de vacuno acompañado de papas fritas cebolla caramelizada y dos huevos fritos.
+6,Curanto en Olla,15000,Preparación sureña con mariscos carne papas y chapaleles cocinado en olla.
+7,Carbonada,8900,Sopa espesa con carne papas zanahoria zapallo y trozos de fideos.
+8,Charquicán,9200,Guiso con carne zapallo papa choclo arvejas y porotos verdes.
+9,Porotos con Riendas,8500,Plato típico con porotos longaniza y tallarines.
 10,Chupe de Jaiba,11500,Exquisito guiso cremoso de jaiba con queso derretido.
 11,Paila Marina,12000,Variedad de mariscos frescos en un caldo aromático.
-12,Congrio Frito,14000,Fresco congrio frito, acompañado de ensalada chilena o papas cocidas.
-13,Milanesa con Puré,9900,Tierna milanesa de vacuno apanada, servida con cremoso puré de papas.
-14,Arrollado Huaso,7500,Carne de cerdo enrollada con condimentos, típica de la cocina chilena.
-15,Sopaipillas con Pebre,2500,Deliciosas sopaipillas fritas, perfectas para acompañar con pebre casero.
-16,Ensalada Chilena,4000,Ensalada fresca de tomate y cebolla en pluma, aderezada con aceite y cilantro.
+12,Congrio Frito,14000,Fresco congrio frito acompañado de ensalada chilena o papas cocidas.
+13,Milanesa con Puré,9900,Tierna milanesa de vacuno apanada servida con cremoso puré de papas.
+14,Arrollado Huaso,7500,Carne de cerdo enrollada con condimentos típica de la cocina chilena.
+15,Sopaipillas con Pebre,2500,Deliciosas sopaipillas fritas perfectas para acompañar con pebre casero.
+16,Ensalada Chilena,4000,Ensalada fresca de tomate y cebolla en pluma aderezada con aceite y cilantro.
 17,Papas Fritas,3000,Porción de crujientes papas fritas.
-18,Chorrillana,16000,Gran plato para compartir con papas fritas, cebolla frita, carne en tiras, huevos y longaniza.
-19,Asado de Tira,18000,Corte de carne tierno y jugoso, cocinado a la parrilla.
-20,Merluza Austral Frita,12500,Merluza austral fresca y frita, ideal para un plato marino.
+18,Chorrillana,16000,Gran plato para compartir con papas fritas cebolla frita carne en tiras huevos y longaniza.
+19,Asado de Tira,18000,Corte de carne tierno y jugoso cocinado a la parrilla.
+20,Merluza Austral Frita,12500,Merluza austral fresca y frita ideal para un plato marino.
