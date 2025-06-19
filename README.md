@@ -82,3 +82,7 @@ Este script inicializa el menú y podras empezar a usarlo.
 Asegurate de utilizar laopción 9 del menú primeramente para generar los datos en la BD
 
 Ingresa la opción que quieras utilizar del menú en el terminal y estás listo.
+
+## Diagrama de la Base de Datos:
+
+![Diagrama](Diagrama_transaccional.png)
