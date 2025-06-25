@@ -1,10 +1,6 @@
 import psycopg2
-import os
-from dotenv import load_dotenv
 from datetime import datetime, timedelta
 import random
-
-
 
 NOMBRES_CLIENTES = ["Juan", "Ana", "Carlos", "María", "Pedro", "Lucía", "Jorge", "Camila"]
 APELLIDOS = ["Pérez", "González", "Rodríguez", "López", "Soto", "Vega"]
