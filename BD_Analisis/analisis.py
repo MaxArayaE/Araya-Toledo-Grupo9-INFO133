@@ -21,7 +21,7 @@ def main(anno):
         "password": os.getenv("DB_PASSWORD"),
         }
     
-    #Conexión a ala BD
+    #Conexión a ala BD para verificar existencia de datos y fechas
     conn = psycopg2.connect(**datos_bd)
     cursor = conn.cursor()
     consulta = '''
