@@ -9,7 +9,9 @@ def main(anno):
     print(f"Analizando el año {anno}")
 
     #Se cargan los datos del .env
-    load_dotenv()
+    
+    dotenv_path = os.path.join(os.path.dirname(__file__), '..', 'Credenciales_ENV', '.env')
+    load_dotenv(dotenv_path)
 
     datos_bd={ 
         "host": os.getenv("DB_HOST"),
