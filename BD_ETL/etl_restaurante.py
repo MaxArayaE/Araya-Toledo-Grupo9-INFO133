@@ -20,11 +20,11 @@ def run_etl():
         # Conexión a la Base de Datos de Origen (Transaccional)
         print("Conectando a la base de datos de origen...")
         conn_source = psycopg2.connect(
-            host=os.getenv("DB_HOST_SOURCE"),
-            port=os.getenv("DB_PORT_SOURCE"),
+            host=os.getenv("DB_HOST"),
+            port=os.getenv("DB_PORT"),
             dbname=os.getenv("DB_NAME_SOURCE"),
-            user=os.getenv("DB_USER_SOURCE"),
-            password=os.getenv("DB_PASSWORD_SOURCE")
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD")
         )
         cursor_source = conn_source.cursor()
         print("Conexión a la BD de origen establecida.")
@@ -32,11 +32,11 @@ def run_etl():
         # Conexión a la Base de Datos de Destino (Analítica/Data Warehouse)
         print("Conectando a la base de datos de destino...")
         conn_target = psycopg2.connect(
-            host=os.getenv("DB_HOST_TARGET"),
-            port=os.getenv("DB_PORT_TARGET"),
+            host=os.getenv("DB_HOST"),
+            port=os.getenv("DB_PORT"),
             dbname=os.getenv("DB_NAME_TARGET"),
-            user=os.getenv("DB_USER_TARGET"),
-            password=os.getenv("DB_PASSWORD_TARGET")
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD")
         )
         cursor_target = conn_target.cursor()
         print("Conexión a la BD de destino establecida.")
