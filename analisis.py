@@ -19,12 +19,25 @@ def main(anno):
         "password": os.getenv("DB_PASSWORD"),
         }
     
+    #Conexión a ala BD
+    conn = psycopg2.connect(**datos_bd)
+    cursor = conn.cursor()
+    consulta = '''
+    SELECT "Fecha" FROM "Hechos_Ordenes" 
+    WHERE EXTRACT(YEAR FROM "Fecha") = %s;
+    '''
+    cursor.execute(consulta, (anno,))
+    resultados = cursor.fetchall()
+    cursor.close()
+
+    #Se asegura de que existan datos para el año solicitado
+    if not resultados:
+        print(f"No se encontraron pedidos para el año {anno}.")
+        return
+    
     #Crea carpeta si no existe, para guardar los gráficos
     os.makedirs(f'Gráficos_Resultados_{anno}', exist_ok=True)
 
-    #Conexión a la Base de Datos.
-    conn = psycopg2.connect(**datos_bd)
-    
     #Llamado a las funciones que crean los gráficos
     platillosMasSolicitados(anno, conn)
     diasDeMayorDemanda(anno, conn)
@@ -53,10 +66,6 @@ def platillosMasSolicitados(anno, conn):
     resultados = cursor.fetchall()
     cursor.close()
 
-    #Se asegura de que existan datos para el año solicitado
-    if not resultados:
-        print(f"No se encontraron pedidos para el año {anno}.")
-        return
 
     #Convertir resultados a DataFrame
     df = pandas.DataFrame(resultados, columns=["Platillo", "Cantidad"])
@@ -91,11 +100,6 @@ def diasDeMayorDemanda(anno, conn):
     resultados = cursor.fetchall()
 
     cursor.close()
-
-    #Se asegura que existan datos para el año solicitado
-    if not resultados:
-        print(f"No se encontraron pedidos para el año {anno}.")
-        return
 
     #Convertir resultados a DataFrame
     df = pandas.DataFrame(resultados, columns=["dia_semana"])
@@ -147,11 +151,6 @@ def ventaPromedioMensual(anno, conn):
     cursor.execute(consulta, (anno,))
     resultados = cursor.fetchall()
     cursor.close()
-
-    #Nos aseguramos de la existencia de datos
-    if not resultados:
-        print(f"No se encontraron pedidos para el año {anno}.")
-        return
     
     #Se genera el dataframe de los datos
     df = pandas.DataFrame(resultados, columns=["mes", "venta_promedio"])
@@ -192,11 +191,6 @@ def promedioMensualPersonasPorReserva(anno, conn):
     cursor.execute(consulta, (anno,))
     resultados = cursor.fetchall()
     cursor.close()
-
-    if not resultados:
-        print(f"No se encontraron reservas para el año {anno}.")
-        return
-
     #Crear DataFrame
     df = pandas.DataFrame(resultados, columns=["mes", "promedio_personas"])
     
@@ -235,10 +229,6 @@ def ingresosPorMetodoPago(anno, conn):
     cursor.execute(consulta, (anno,))
     resultados = cursor.fetchall()
     cursor.close()
-
-    if not resultados:
-        print(f"No se encontraron ingresos para el año {anno}.")
-        return
 
     #Crear DataFrame
     df = pandas.DataFrame(resultados, columns=["Método de Pago", "Ingresos"])
@@ -293,10 +283,6 @@ def ingresosPorPlatillo(anno, conn):
     cursor.execute(consulta, (anno,))
     resultados = cursor.fetchall()
     cursor.close()
-
-    if not resultados:
-        print(f"No se encontraron ingresos para el año {anno}.")
-        return
 
     #Se genera Dataframe
     df = pandas.DataFrame(resultados, columns=["Platillo", "Ingresos"])
