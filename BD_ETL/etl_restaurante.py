@@ -151,36 +151,27 @@ def run_etl():
 
 
         fact_orders_sql = """
-        WITH RankedReservas AS (
             SELECT
-                "Id_reserva",
-                "Id_cliente",
-                "Id_mesa",
-                "Fecha",
-                "Id_estado",
-                ROW_NUMBER() OVER (PARTITION BY "Id_mesa", "Fecha" ORDER BY "Id_reserva") as rn
-            FROM "Reservas"
-        )
-        SELECT
-            V."Fecha" AS Fecha,
-            RR."Id_cliente" AS Id_cliente,
-            P."Id_mesa" AS N_Mesa,
-            RR."Id_reserva" AS Id_reserva,
-            P."Id_platillo" AS Id_platillo,
-            P."Cantidad_platillo" AS Cantidad,
-            PL."Precio" AS Precio_unitario,
-            P."Subtotal" AS Total,
-            V."Id_metodo" AS Id_metodo,
-            RR."Id_estado" AS Id_estado
-        FROM
-            "Pedidos" P
-        JOIN
-            "Ventas" V ON P."Id_venta" = V."Id_ventas"
-        JOIN
-            "Platillos" PL ON P."Id_platillo" = PL."Id_platillo"
-        LEFT JOIN -- LEFT JOIN porque no todos los pedidos/ventas tienen una reserva directa
-            RankedReservas RR ON P."Id_mesa" = RR."Id_mesa" AND V."Fecha" = RR."Fecha" AND RR.rn = 1;
+                V."Fecha" AS Fecha,
+                R."Id_cliente" AS Id_cliente,
+                P."Id_mesa" AS N_Mesa,
+                R."Id_reserva" AS Id_reserva,
+                P."Id_platillo" AS Id_platillo,
+                P."Cantidad_platillo" AS Cantidad,
+                PL."Precio" AS Precio_unitario,
+                P."Subtotal" AS Total,
+                V."Id_metodo" AS Id_metodo,
+                R."Id_estado" AS Id_estado
+            FROM
+                "Pedidos" P
+            JOIN
+                "Ventas" V ON P."Id_venta" = V."Id_ventas"
+            JOIN
+                "Platillos" PL ON P."Id_platillo" = PL."Id_platillo"
+            JOIN
+                "Reservas" R ON R."Id_mesa" = P."Id_mesa" AND R."Fecha" = V."Fecha"
         """
+
         cursor_source.execute(fact_orders_sql)
         hechos_ordenes_data = cursor_source.fetchall()
 
