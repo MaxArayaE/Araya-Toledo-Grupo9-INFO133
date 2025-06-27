@@ -124,7 +124,7 @@ def diasDeMayorDemanda(anno, conn):
     # Crear el gráfico de torta
     plt.figure(figsize=(8, 8))
     plt.pie(conteo_dias, labels=None, autopct='%1.1f%%', startangle=140)
-    plt.title(f"Días de la semana con mayor demanda en {anno}")
+    plt.title(f"Demanda % por Día de la semana en {anno}")
     plt.axis('equal')
 
     #Guía de colores en la imagen
@@ -132,7 +132,7 @@ def diasDeMayorDemanda(anno, conn):
     plt.tight_layout()
     
     #Guardado de la imagen
-    guardado = os.path.join(f'Gráficos_Resultados_{anno}', f'Analisis_%_dias_semana_de_mayor_demanda_{anno}.png')
+    guardado = os.path.join(f'Gráficos_Resultados_{anno}', f'Analisis_%_demanda_día_semana_{anno}.png')
     plt.savefig(guardado)
     plt.close()
 
